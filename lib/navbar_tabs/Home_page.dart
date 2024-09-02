@@ -24,13 +24,13 @@ class HomeTab extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          CircularProgressIndicator(
-                            color: Color(0xffFFBB3B),
-                          ),
-                        ],
-                      ));
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(
+                        color: Color(0xffFFBB3B),
+                      ),
+                    ],
+                  ));
                 }
                 if (snapshot.hasError) {
                   return const Text("Something went wrong. Try again.");
@@ -41,7 +41,7 @@ class HomeTab extends StatelessWidget {
                 List<Results> popularMovies = snapshot.data.results ?? [];
 
                 return Padding(
-                  padding: const EdgeInsets.only(top: 40,bottom: 0),
+                  padding: const EdgeInsets.only(top: 40, bottom: 0),
                   child: CarouselSlider(
                     items: popularMovies.map((movie) {
                       return Builder(
@@ -82,7 +82,8 @@ class HomeTab extends StatelessWidget {
                     child: FutureBuilder(
                       future: ApiManeger.getNewReleasesMovies(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
                           return const Center(
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -95,23 +96,28 @@ class HomeTab extends StatelessWidget {
                           );
                         }
                         if (snapshot.hasError) {
+                          print(snapshot);
                           return const Text("Something went wrong. Try again.");
                         }
                         if (!snapshot.hasData) {
                           return const Text("No data available.");
                         }
-                        List<New_Results> popularMovies = snapshot.data.results ?? [];
-                    
+                        List<New_Results> popularMovies =
+                            snapshot.data.results ?? [];
+
                         return Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: ListView.builder(
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
-                            itemCount: popularMovies.length, // Set the item count
+                            itemCount: popularMovies.length,
+                            // Set the item count
                             itemBuilder: (context, index) {
                               // Access the element at index
                               New_Results movie = popularMovies[index];
-                              return RegularMovieCard(movieResult: movie);
+                              return MovieCard(
+                                movieResult: movie,
+                              );
                             },
                           ),
                         );
@@ -121,7 +127,9 @@ class HomeTab extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             Container(
               width: double.infinity,
               height: 350, // Adjust the height as needed
@@ -137,47 +145,53 @@ class HomeTab extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: FutureBuilder(
-                      future: ApiManeger.getTopRatedMovies(),
-                      builder: (BuildContext context, AsyncSnapshot snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
-                          return const Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CircularProgressIndicator(
-                                  color: Color(0xffFFBB3B),
-                                ),
-                              ],
-                            ),
-                          );
-                        }
-                        if (snapshot.hasError) {
-                          return const Text("Something went wrong. Try again.");
-                        }
-                        if (!snapshot.hasData) {
-                          return const Text("No data available.");
-                        }
-                        List<TopRatedResult> popularMovies = snapshot.data.results ?? [];
-                        return Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: ListView.builder(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: popularMovies.length, // Set the item count
-                            itemBuilder: (context, index) {
-                              // Access the element at index
-                              TopRatedResult movie = popularMovies[index];
-                              return TopRatedCard(movieResult: movie);
-                            },
+                      child: FutureBuilder(
+                    future: ApiManeger.getTopRatedMovies(),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircularProgressIndicator(
+                                color: Color(0xffFFBB3B),
+                              ),
+                            ],
                           ),
                         );
-                      },
-                    )
-                  ),
+                      }
+                      if (snapshot.hasError) {
+                        print(snapshot);
+                        return const Text("Something went wrong. Try again.");
+                      }
+                      if (!snapshot.hasData) {
+                        return const Text("No data available.");
+                      }
+                      List<TopRatedResult> popularMovies =
+                          snapshot.data.results ?? [];
+                      return Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: popularMovies.length,
+                          // Set the item count
+                          itemBuilder: (context, index) {
+                            // Access the element at index
+                            TopRatedResult movie = popularMovies[index];
+                            return MovieCard(movieResult: movie,
+
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  )),
                 ],
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),

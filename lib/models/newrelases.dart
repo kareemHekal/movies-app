@@ -3,16 +3,18 @@ class newReleasemovies {
   int? page;
   List<New_Results>? results;
   int? totalPages;
+  bool? isSelected;
   int? totalNew_Results;
 
   newReleasemovies(
       {this.dates,
-        this.page,
-        this.results,
-        this.totalPages,
-        this.totalNew_Results});
+      this.page,
+      this.results,
+      this.totalPages,
+      this.totalNew_Results});
 
   newReleasemovies.fromJson(Map<String, dynamic> json) {
+    isSelected = json["isSelected"];
     dates = json['dates'] != null ? new Dates.fromJson(json['dates']) : null;
     page = json['page'];
     if (json['results'] != null) {
@@ -23,14 +25,6 @@ class newReleasemovies {
     }
     totalPages = json['total_pages'];
     totalNew_Results = json['total_results'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['page'] = this.page;
-    data['total_pages'] = this.totalPages;
-    data['total_results'] = this.totalNew_Results;
-    return data;
   }
 }
 
@@ -44,8 +38,6 @@ class Dates {
     maximum = json['maximum'];
     minimum = json['minimum'];
   }
-
-
 }
 
 class New_Results {
@@ -55,6 +47,7 @@ class New_Results {
   int? id;
   String? originalLanguage;
   String? originalTitle;
+  bool? isSelected;
   String? overview;
   double? popularity;
   String? posterPath;
@@ -65,23 +58,25 @@ class New_Results {
   int? voteCount;
 
   New_Results(
-      {this.adult,
-        this.backdropPath,
-        this.genreIds,
-        this.id,
-        this.originalLanguage,
-        this.originalTitle,
-        this.overview,
-        this.popularity,
-        this.posterPath,
-        this.releaseDate,
-        this.title,
-        this.video,
-        this.voteAverage,
-        this.voteCount});
+      {this.isSelected,
+      this.adult,
+      this.backdropPath,
+      this.genreIds,
+      this.id,
+      this.originalLanguage,
+      this.originalTitle,
+      this.overview,
+      this.popularity,
+      this.posterPath,
+      this.releaseDate,
+      this.title,
+      this.video,
+      this.voteAverage,
+      this.voteCount,});
 
   New_Results.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
+    isSelected = json["isSelected"];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'].cast<int>();
     id = json['id'];
@@ -96,5 +91,4 @@ class New_Results {
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
   }
-
 }

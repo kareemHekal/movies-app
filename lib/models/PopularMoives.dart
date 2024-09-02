@@ -32,7 +32,7 @@ class Results {
   String? posterPath;
   String? releaseDate;
   String? title;
-  bool? video;
+  bool? video;bool? isSelected;
   double? voteAverage;
   int? voteCount;
 
@@ -48,7 +48,7 @@ class Results {
         this.posterPath,
         this.releaseDate,
         this.title,
-        this.video,
+        this.video,this.isSelected,
         this.voteAverage,
         this.voteCount});
 
@@ -67,6 +67,7 @@ class Results {
     video = json['video'];
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
+    isSelected = json["isSelected"];
   }
 
 }

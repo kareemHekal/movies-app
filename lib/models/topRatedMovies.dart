@@ -1,3 +1,4 @@
+
 class topRatedMovies {
   int? page;
   List<TopRatedResult>? results;
@@ -25,6 +26,7 @@ class TopRatedResult {
   int? id;
   String? originalLanguage;
   String? originalTitle;
+  bool? isSelected;
   String? overview;
   double? popularity;
   String? posterPath;
@@ -48,7 +50,7 @@ class TopRatedResult {
         this.title,
         this.video,
         this.voteAverage,
-        this.voteCount});
+        this.voteCount,this.isSelected});
 
   TopRatedResult.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
@@ -65,5 +67,6 @@ class TopRatedResult {
     video = json['video'];
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
+    isSelected = json["isSelected"];
   }
 }

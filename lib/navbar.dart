@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/navbar_tabs/Home_page.dart';
 import 'package:movie_app/navbar_tabs/browse_page.dart';
 import 'package:movie_app/navbar_tabs/search_page.dart';
 import 'package:movie_app/navbar_tabs/watch_list_page.dart';
+
+import 'navbar_tabs/Home_page.dart';
 
 class Home_page extends StatefulWidget {
   const Home_page({super.key});

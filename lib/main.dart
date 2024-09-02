@@ -1,9 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/colors.dart';
 import 'navbar.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -11,27 +14,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-
-          bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            backgroundColor: app_colors.black,
-            selectedItemColor: app_colors.yellow, // Set the color of the selected item
-            unselectedItemColor: app_colors.white, // Set the color of the unselected items
-          ),
-        textTheme: TextTheme(bodyMedium: TextStyle(
-          color:app_colors.white
-        )),
-        useMaterial3: true,
-      ),
-      initialRoute:'/HomeScreen',
-      routes: {
-        '/HomeScreen': (context) =>  Home_page(),
+    return FutureBuilder(
+      future: Firebase.initializeApp(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text('Error initializing Firebase');
+        } else if (snapshot.connectionState == ConnectionState.done) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                backgroundColor: app_colors.black,
+                selectedItemColor: app_colors.yellow,
+                unselectedItemColor: app_colors.white,
+              ),
+              textTheme: TextTheme(bodyMedium: TextStyle(color: app_colors.white)),
+              useMaterial3: true,
+            ),
+            initialRoute:'/HomeScreen',
+            routes: {
+              '/HomeScreen': (context) =>  Home_page(),
+            },
+          );
+        } else {
+          return CircularProgressIndicator();
+        }
       },
     );
   }
 }
-
 
