@@ -52,7 +52,7 @@ class watch_list_tab extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .bodyMedium
-                          ?.copyWith(color: app_colors.black),
+                          ?.copyWith(color: app_colors.yellow),
                     ),
                   );
                 }

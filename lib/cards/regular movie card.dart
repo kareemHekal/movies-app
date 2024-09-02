@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/firebase/firebase_functions.dart';
 
 import '../colors.dart';
-import '../models/topRatedMovies.dart';
 import '../models/watch_list_movie.dart';
+import '../movie details.dart';
 
 class MovieCard extends StatefulWidget {
   final dynamic movieResult;
@@ -28,75 +28,87 @@ class _MovieCardState extends State<MovieCard> {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Card(
-        color: Colors.transparent,
-        elevation: 5,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: 200,
-                width: 150,
-                child: Stack(
-                  children: [
-                    Positioned.fill(
-                      child: Image.network(
-                        'https://image.tmdb.org/t/p/w500${widget.movieResult
-                            .posterPath}',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Align(
-                        alignment: Alignment.topLeft,
-                        child: GestureDetector(
-                            onTap: () {
-                              addMovieToWatchList();
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(8.0),
-                              child: (widget.movieResult.isSelected == true)
-                                  ? Image.asset(
-                                  "assets/images/bookmark (1).png")
-                                  : Image.asset("assets/images/bookmark.png"),
-                            )
-                        )
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: 150,
-                height: 100,
-                color: app_colors.grey,
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => MovieDetails_page(id: widget.movieResult.id)),
+          );
+        },
+        child: Card(
+          color: Colors.transparent,
+          elevation: 5,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  height: 200,
+                  width: 150,
+                  child: Stack(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Icon(Icons.star, color: app_colors.yellow),
-                          Text(
-                            "${widget.movieResult.voteAverage}",
-                            style: TextStyle(fontSize: 16, color: Colors.white),
-                          ),
-                        ],
+                      Positioned.fill(
+                        child: Image.network(
+                          'https://image.tmdb.org/t/p/w500${widget.movieResult
+                              .posterPath}',
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      Text(
-                        "${widget.movieResult.title}",
-                        style: TextStyle(fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                      Text(
-                        " ${widget.movieResult.releaseDate}",
-                        style: TextStyle(fontSize: 10, color: Colors.white),
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: GestureDetector(
+                              onTap: () {
+                                addMovieToWatchList();
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(8.0),
+                                child: (widget.movieResult.isSelected == true)
+                                    ? Image.asset(
+                                    "assets/images/bookmark (1).png")
+                                    : Image.asset("assets/images/bookmark.png"),
+                              )
+                          )
                       ),
                     ],
                   ),
                 ),
-              ),
-            ],
+                Container(
+                  width: 150,
+                  height: 100,
+                  color: app_colors.grey,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Icon(Icons.star, color: app_colors.yellow),
+                            Text(
+                              "${widget.movieResult.voteAverage}",
+                              style: TextStyle(fontSize: 16, color: Colors.white),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          "${widget.movieResult.title}",
+                          style: TextStyle(fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        Text(
+                          " ${widget.movieResult.releaseDate}",
+                          style: TextStyle(fontSize: 10, color: Colors.white),
+                        ),
+                        Text(
+                          " ${widget.movieResult.id}",
+                          style: TextStyle(fontSize: 10, color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

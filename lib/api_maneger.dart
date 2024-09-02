@@ -4,8 +4,9 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:movie_app/models/PopularMoives.dart';
 import 'package:movie_app/models/newrelases.dart';
-
+import 'models/moiveDetailsModel.dart';
 import 'models/topRatedMovies.dart';
+import 'movie details.dart';
 
 class ApiManeger {
  static Future<popularMovies> getPopularMovies() async{
@@ -27,6 +28,19 @@ class ApiManeger {
    topRatedMovies topRatedmovies = topRatedMovies.fromJson(json);
    return topRatedmovies;
  }
+
+ static Future<movieDartModel> getmovieDartModel(int id) async {
+   Uri url = Uri.https("api.themoviedb.org", "3/movie/$id", {
+     "api_key": "2b35d85ca7c37f8cf34c134a92690a97",
+   });
+   http.Response response = await http.get(url);
+   var json = jsonDecode(response.body);
+   movieDartModel topRatedmovies = movieDartModel.fromJson(json);
+   return topRatedmovies;
+ }
+
+
+
  static Future<newReleasemovies> getNewReleasesMovies() async {
    try {
      Uri url = Uri.https("api.themoviedb.org", "3/movie/upcoming", {
