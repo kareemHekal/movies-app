@@ -1,7 +1,7 @@
 class WatchListMovieModel {
   String id;
   String posterimage;
-  String movieName;
+  String title;
   String Date;
   bool isSelected;
 
@@ -9,13 +9,13 @@ class WatchListMovieModel {
       {required this.isSelected,
         this.id = '',
         required this.posterimage,
-        required this.movieName,
+        required this.title,
         required this.Date,
         });
 
   Map<String, dynamic> toJson() { // Fix the typo here
     return {
-      "moivename": movieName,
+      "moivename": title,
       "poster": posterimage,
       "isSelected": isSelected,
       "date": Date,
@@ -25,7 +25,7 @@ class WatchListMovieModel {
 
   WatchListMovieModel.fromJson(Map<String, dynamic> json)
       : this(
-      movieName: json['moivename'],
+      title: json['moivename'],
       posterimage: json['poster'],
       Date: json['date'],
       id: json['id'],

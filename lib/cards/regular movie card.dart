@@ -30,9 +30,9 @@ class _MovieCardState extends State<MovieCard> {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => MovieDetails_page(id: widget.movieResult.id)),
+            MaterialPageRoute(builder: (context) => MovieDetails_page(movieResult: widget.movieResult)),
           );
         },
         child: Card(
@@ -99,10 +99,7 @@ class _MovieCardState extends State<MovieCard> {
                           " ${widget.movieResult.releaseDate}",
                           style: TextStyle(fontSize: 10, color: Colors.white),
                         ),
-                        Text(
-                          " ${widget.movieResult.id}",
-                          style: TextStyle(fontSize: 10, color: Colors.white),
-                        ),
+
                       ],
                     ),
                   ),
@@ -179,7 +176,7 @@ class _MovieCardState extends State<MovieCard> {
     });
     WatchListMovieModel movie = WatchListMovieModel(
       Date: widget.movieResult.releaseDate,
-      movieName: widget.movieResult.title,
+      title: widget.movieResult.title,
       isSelected: widget.movieResult.isSelected,
       posterimage: widget.movieResult.posterPath,
     );
