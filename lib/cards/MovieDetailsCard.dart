@@ -56,12 +56,12 @@ class MovieDetailsCard extends StatelessWidget {
                                 children: [
                                   SingleChildScrollView(
                                     scrollDirection: Axis.horizontal,
-                                    child: GenresChoiceChips(genres: movieDetails.genres!),
+                                    child: GenresChoiceChips(genres: movieDetails.genres??[]),
                                   ),
                                   SizedBox(height: 10,),
                                   Expanded(
                                     child: ListView(
-                                        children: [Text(movieDetails.overview!),
+                                        children: [Text(movieDetails.overview??''),
                                         SizedBox(height: 10,),
                                         Row(
                                           mainAxisAlignment: MainAxisAlignment.start,

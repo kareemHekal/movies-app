@@ -30,7 +30,7 @@ class MovieDetails_page extends StatelessWidget {
         child: Column(
           children: [
             FutureBuilder(
-              future: ApiManeger.getmovieDartModel(movieResult.id),
+              future: ApiManeger.getmovieDartModel(movieResult?.id), // Add null check for movieResult.id
               builder: (BuildContext context, AsyncSnapshot snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(
@@ -71,7 +71,7 @@ class MovieDetails_page extends StatelessWidget {
                   ),
                   Expanded(
                       child: FutureBuilder(
-                        future: ApiManeger.getSimilarMovies(movieResult.id),
+                        future: ApiManeger.getSimilarMovies(movieResult?.id), // Add null check for movieResult.id
                         builder: (BuildContext context, AsyncSnapshot snapshot) {
                           if (snapshot.connectionState == ConnectionState.waiting) {
                             return const Center(
@@ -92,21 +92,28 @@ class MovieDetails_page extends StatelessWidget {
                           if (!snapshot.hasData) {
                             return const Text("No data available.");
                           }
-                          similar_Movies similarMovies = snapshot.data; // Get the instance of similar_Movies
-                          return Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemCount: similarMovies.results?.length, // Access the results property on the instance
-                              itemBuilder: (context, index) {
-                                // Access the element at index
-                                Results movie = similarMovies.results![index]; // Use the instance property
-                                return MovieCard(movieResult: movie); // assume you have a MovieCard widget
-                              },
-                            ),
-                          );
+                          similar_Movies similarMovies = snapshot.data;
+                          if (similarMovies?.results != null) { // Add null check for similarMovies.results
+                            return Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: similarMovies.results?.length,
+                                itemBuilder: (context, index) {
+                                  if (similarMovies.results != null) { // Add null check for similarMovies.results
+                                    Results movie = similarMovies.results![index];
+                                    return MovieCard(movieResult: movie);
+                                  } else {
+                                    return Container(); // Return an empty container if similarMovies.results is null
+                                  }
+                                },
+                              ),
+                            );
+                          } else {
+                            return Container(); // Return an empty container if similarMovies.results is null
+                          }
                         },
-                      )),
+                      ),),
                 ],
               ),
             ),

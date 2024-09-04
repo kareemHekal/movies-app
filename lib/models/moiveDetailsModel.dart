@@ -68,7 +68,6 @@ class movieDartModel {
     homepage = json['homepage'];
     id = json['id'];
     imdbId = json['imdb_id'];
-    originCountry = json['origin_country'].cast<String>();
     originalLanguage = json['original_language'];
     originalTitle = json['original_title'];
     overview = json['overview'];

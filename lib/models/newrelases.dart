@@ -1,3 +1,5 @@
+import 'package:movie_app/models/moiveDetailsModel.dart';
+
 class newReleasemovies {
   Dates? dates;
   int? page;
@@ -49,6 +51,7 @@ class New_Results {
   String? originalTitle;
   bool? isSelected;
   String? overview;
+  List<Genres>? genres;
   double? popularity;
   String? posterPath;
   String? releaseDate;
@@ -59,7 +62,7 @@ class New_Results {
 
   New_Results(
       {this.isSelected,
-      this.adult,
+      this.adult, required this.genres,
       this.backdropPath,
       this.genreIds,
       this.id,
@@ -76,6 +79,7 @@ class New_Results {
 
   New_Results.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
+    genres = json['geners'];
     isSelected = json["isSelected"];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'].cast<int>();

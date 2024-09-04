@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:movie_app/firebase/firebase_functions.dart';
 import '../colors.dart';
+import '../models/moiveDetailsModel.dart';
+import '../models/newrelases.dart';
 import '../models/watch_list_movie.dart';
 import '../movie details.dart';
 
@@ -12,13 +14,29 @@ class WatchlistMovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    movieDartModel moviemodel_ = movieDartModel(
+        posterPath: moviemodel.posterPath,
+        title: moviemodel.title,
+        overview: moviemodel.overview,
+        genres: moviemodel.genres,
+        backdropPath: moviemodel.backdropPath,
+        releaseDate: moviemodel.Date,
+        id: moviemodel.movie_id);
+
     return Padding(
       padding: const EdgeInsets.only(left: 12, right: 12, top: 5, bottom: 10),
       child: GestureDetector(
         onTap: () {
+          print(moviemodel.id);
+          print("myInt:${moviemodel.isSelected}");
+          print("myInt:${moviemodel.posterPath}");
+          print("myInt:${moviemodel.title}");
+          print("myInt:${moviemodel.Date}");
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => MovieDetails_page(movieResult: moviemodel)),
+            MaterialPageRoute(
+                builder: (context) =>
+                    MovieDetails_page(movieResult: moviemodel_)),
           );
         },
         child: Container(
@@ -125,7 +143,7 @@ class WatchlistMovieCard extends StatelessWidget {
                     child: Image.network(
                       width: 140,
                       height: 150,
-                      'https://image.tmdb.org/t/p/w500${moviemodel.posterimage}',
+                      'https://image.tmdb.org/t/p/w500${moviemodel.posterPath}',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -141,20 +159,17 @@ class WatchlistMovieCard extends StatelessWidget {
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Text(
-                            moviemodel.title,
+                            moviemodel.title ?? '',
                             textAlign: TextAlign.start,
                             style: TextStyle(fontSize: 20),
                           ),
                         ),
                       ),
                       Text(
-                        moviemodel.Date,
+                        moviemodel.Date!,
                         textAlign: TextAlign.start,
                         style: TextStyle(fontSize: 15),
                       ),
-                      Text(moviemodel.isSelected == true ? "true" : "false",
-                          style: TextStyle(fontSize: 15),
-                          textAlign: TextAlign.start),
                     ],
                   )
                 ],

@@ -176,9 +176,13 @@ class _MovieCardState extends State<MovieCard> {
     });
     WatchListMovieModel movie = WatchListMovieModel(
       Date: widget.movieResult.releaseDate,
+      overview: widget.movieResult.overview,
+      movie_id: widget.movieResult.id ,
+      genres: widget.movieResult.genres,
+      backdropPath: widget.movieResult.backdropPath,
       title: widget.movieResult.title,
       isSelected: widget.movieResult.isSelected,
-      posterimage: widget.movieResult.posterPath,
+      posterPath: widget.movieResult.posterPath,
     );
     Firebase_Functions.addTask(movie);
   }
