@@ -1,19 +1,20 @@
-import 'moiveDetailsModel.dart';
+import 'package:movie_app/models/moiveDetailsModel.dart';
 
-class popularMovies {
+class searchMoivesModel {
   int? page;
-  List<Results>? results;
+  List<Results_>? results;
   int? totalPages;
   int? totalResults;
 
-  popularMovies({this.page, this.results, this.totalPages, this.totalResults});
+  searchMoivesModel(
+      {this.page, this.results, this.totalPages, this.totalResults});
 
-  popularMovies.fromJson(Map<String, dynamic> json) {
+  searchMoivesModel.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
-      results = <Results>[];
+      results = <Results_>[];
       json['results'].forEach((v) {
-        results!.add(new Results.fromJson(v));
+        results!.add(new Results_.fromJson(v));
       });
     }
     totalPages = json['total_pages'];
@@ -22,45 +23,46 @@ class popularMovies {
 
 }
 
-class Results {
+class Results_ {
   bool? adult;
   String? backdropPath;
   List<int>? genreIds;
   int? id;
+  List<Genres>?genres;
   String? originalLanguage;
   String? originalTitle;
-  List<Genres>? genres;
   String? overview;
   double? popularity;
   String? posterPath;
   String? releaseDate;
   String? title;
-  bool? video;bool? isSelected;
+  bool? video;
   double? voteAverage;
   int? voteCount;
 
-  Results(
+  Results_(
       {this.adult,
         this.backdropPath,
         this.genreIds,
+        this.genres,
         this.id,
         this.originalLanguage,
-        this.genres,
         this.originalTitle,
         this.overview,
         this.popularity,
         this.posterPath,
         this.releaseDate,
         this.title,
-        this.video,this.isSelected,
+        this.video,
         this.voteAverage,
         this.voteCount});
 
-  Results.fromJson(Map<String, dynamic> json) {
+  Results_.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     genreIds = json['genre_ids'].cast<int>();
     id = json['id'];
+    genres = json ['geners'];
     originalLanguage = json['original_language'];
     originalTitle = json['original_title'];
     overview = json['overview'];
@@ -68,11 +70,9 @@ class Results {
     posterPath = json['poster_path'];
     releaseDate = json['release_date'];
     title = json['title'];
-    genres = json ['geners'];
     video = json['video'];
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
-    isSelected = json["isSelected"];
   }
 
 }

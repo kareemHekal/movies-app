@@ -27,11 +27,7 @@ class WatchlistMovieCard extends StatelessWidget {
       padding: const EdgeInsets.only(left: 12, right: 12, top: 5, bottom: 10),
       child: GestureDetector(
         onTap: () {
-          print(moviemodel.id);
-          print("myInt:${moviemodel.isSelected}");
-          print("myInt:${moviemodel.posterPath}");
-          print("myInt:${moviemodel.title}");
-          print("myInt:${moviemodel.Date}");
+
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(

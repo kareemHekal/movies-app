@@ -41,6 +41,18 @@ dependencies:
   cloud_firestore: ^5.2.1
   flutter_slidable: ^3.1.1
   http: ^1.2.2
+  flutter_native_splash: ^2.4.1
+flutter_native_splash:
+  color: "#1A1A1A"
+  image: "assets/images/Frame 2.png"
+  branding: "assets/images/Group 23.png"
+  branding_mode: bottom
+  branding_bottom_padding: 40
+  android_12:
+    image: "assets/images/Frame 2.png"
+    color: "#1A1A1A"
+    icon_background_color: "#1A1A1A"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

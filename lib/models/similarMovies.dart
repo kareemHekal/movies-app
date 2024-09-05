@@ -55,7 +55,7 @@ class Results {
       this.overview,
       this.popularity,
       this.posterPath,
-        this.isSelected,
+      this.isSelected,
       this.releaseDate,
       this.title,
       this.video,
@@ -79,5 +79,4 @@ class Results {
     voteCount = json['vote_count'];
     isSelected = json['isSelected'];
   }
-
 }
