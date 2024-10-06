@@ -1,7 +1,7 @@
 class movieDartModel {
   bool? adult;
   String? backdropPath;
-  Null? belongsToCollection;
+  var belongsToCollection;
   int? budget;
   List<Genres>? genres;
   String? homepage;
